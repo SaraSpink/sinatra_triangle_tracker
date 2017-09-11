@@ -8,6 +8,22 @@ get('/') do
 end
 
 get('/output') do
+  @side1 = params.fetch("side1")
+  @side2 = params.fetch("side2")
+  @side3 = params.fetch("side3")
+
+  triangle = Triangles.new(@side1, @side2, @side3)
+
+  if triangle.not_a_triangle?
+    @string_to_display = "This is not a triangle, try again."
+  elsif triangle.is_equilateral?
+    @string_to_display = "You have an EQUILATERAL triangle."
+  elsif triangle.is_isoceles?
+    @string_to_display = "You have an ISOCELES triangle."
+  else
+    @string_to_display = "You have a SCALENE triangle."
+  end
+
   # @length = params.fetch("length")
   # @width = params.fetch("width")
   # rectangle = Rectangle.new(@length, @width)
